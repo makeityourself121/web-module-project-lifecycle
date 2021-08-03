@@ -1,7 +1,19 @@
 .App {
   text-align: center;
 }
-
+.follow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+p {
+  color: aqua;
+}
+.follower-card {
+  text-align: center;
+  width: 35%;
+  margin-left: 20px;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
