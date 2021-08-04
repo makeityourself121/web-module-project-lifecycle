@@ -1,6 +1,10 @@
 .App {
   text-align: center;
 }
+a {
+  text-decoration: none;
+  color: #5f9ea0;
+}
 .follow {
   display: flex;
   flex-wrap: wrap;
@@ -8,6 +12,15 @@
 }
 p {
   color: aqua;
+}
+button {
+  margin-left: 1%;
+  border-style: dotted;
+}
+button:hover {
+  background-color: aqua;
+  border-style: inherit;
+  border-radius: inherit;
 }
 .follower-card {
   text-align: center;

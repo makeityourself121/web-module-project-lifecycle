@@ -34,13 +34,16 @@ class App extends React.Component {
   handleClick = (e) => {
     e.preventDefault();
 
-    axios.get(`https://api.github.com/users/${this.state.user}`).then((res) => {
-      console.log(res.data);
-      this.setState({
-        ...this.state,
-        avatar: res.data,
-      });
-    });
+    axios
+      .get(`https://api.github.com/users/${this.state.user}`)
+      .then((res) => {
+        this.setState({
+          ...this.state,
+          avatar: res.data,
+          avatarf: [],
+        });
+      })
+      .catch((err) => alert(err));
   };
 
   handleclicks = (e) => {
@@ -49,7 +52,6 @@ class App extends React.Component {
       .get(`https://api.github.com/users/${this.state.user}/followers`)
       .then((res) => {
         const follow = res.data.map((i) => {
-          console.log(i);
           return i;
         });
         this.setState({
@@ -60,23 +62,18 @@ class App extends React.Component {
   };
 
   render() {
-    const { user } = this.state;
     return (
       <div className="App">
         <h1>Github Cards</h1>
         <input onChange={this.handleChange} placeholder="Search User" />
-        <button
-          style={{ borderRadius: "25%", marginLeft: "10px" }}
-          onClick={this.handleClick}
-        >
-          Get User
-        </button>
-        <p>Click on user to see followers</p>
-        <div onClick={this.handleclicks} className="image-container">
+        <button onClick={this.handleClick}>Get User</button>
+        <p>Click on photo to see followers</p>
+        <div className="image-container">
           <h2 style={{ color: "black", fontFamily: "serif" }}>
             {this.state.avatar.name}
           </h2>
           <img
+            onClick={this.handleclicks}
             style={{ width: "150px", borderRadius: "25%" }}
             src={this.state.avatar.avatar_url}
             alt={this.state.avatar.name}
@@ -88,10 +85,7 @@ class App extends React.Component {
             {" "}
             Location: 🌴 {this.state.avatar.location}🌴
           </h4>
-          <a
-            style={({ color: "navyblue" }, { textDecoration: "none" })}
-            href={this.state.avatar.html_url}
-          >
+          <a style={{ color: "navyblue" }} href={this.state.avatar.html_url}>
             👉 Check Out My Github! 👈
           </a>
         </div>
@@ -104,10 +98,7 @@ class App extends React.Component {
                 alt={i.name}
               />
               <h4 style={{ color: "black" }}>{i.login}</h4>
-              <a
-                style={({ color: "navyblue" }, { textDecoration: "none" })}
-                href={i.html_url}
-              >
+              <a style={{ color: "navyblue" }} href={i.html_url}>
                 👉 Check Out My Github! 👈
               </a>
             </div>
